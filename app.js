@@ -126,8 +126,14 @@ qrForm.addEventListener('submit', function(e) {
         // Esperar a que se genere el canvas
         setTimeout(() => {
             const canvas = qrcodeDiv.querySelector('canvas');
+            const img = qrcodeDiv.querySelector('img');
+            
             if (canvas) {
                 currentQrDataUrl = canvas.toDataURL();
+                
+                // Asegurar que el QR sea visible
+                canvas.style.display = 'block';
+                canvas.style.margin = '0 auto';
                 
                 // Mostrar resultado
                 qrPlaceholder.style.display = 'none';

@@ -218,6 +218,23 @@ body {
     margin-bottom: 1.5rem;
     border: 2px solid var(--border);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#qrcode {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#qrcode canvas,
+#qrcode img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 0.5rem;
 }
 
 .qr-info {
