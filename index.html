@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Generador de códigos QR online gratis">
+    <title>Generador de Códigos QR</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>Generador de Códigos QR</h1>
+            <p>Crea códigos QR para tus links con fecha de expiración</p>
+        </header>
+
+        <div class="content">
+            <div class="card">
+                <form id="qrForm">
+                    <div class="form-group">
+                        <label for="url">URL o Link</label>
+                        <input
+                            type="text"
+                            id="url"
+                            placeholder="https://ejemplo.com"
+                            required
+                        />
+                        <span class="error-text" id="urlError" style="display: none;">URL no válida</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="expiration">Expiración (meses)</label>
+                        <input
+                            type="number"
+                            id="expiration"
+                            min="1"
+                            max="60"
+                            value="12"
+                        />
+                        <span class="help-text" id="expirationHelp">12 meses desde ahora</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="size">Tamaño del QR (px)</label>
+                        <input
+                            type="range"
+                            id="size"
+                            min="128"
+                            max="512"
+                            step="64"
+                            value="256"
+                        />
+                        <span class="help-text" id="sizeHelp">256x256px</span>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="checkbox-group">
+                            <input
+                                type="checkbox"
+                                id="metadata"
+                            />
+                            <label for="metadata" style="margin-bottom: 0;">
+                                Incluir metadata de expiración (JSON)
+                            </label>
+                        </div>
+                        <span class="help-text" id="metadataHelp">
+                            El QR contendrá solo la URL. No hay validación real de expiración.
+                        </span>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">
+                        Generar QR
+                    </button>
+
+                    <button type="button" id="resetBtn" class="btn btn-secondary" style="display: none;">
+                        Nuevo QR
+                    </button>
+                </form>
+            </div>
+
+            <div class="card">
+                <div id="qrPlaceholder" class="qr-placeholder">
+                    <div class="placeholder-icon">QR</div>
+                    <p>Ingresa una URL y haz clic en "Generar QR"</p>
+                    <p style="font-size: 0.875rem; opacity: 0.7;">
+                        El código QR aparecerá aquí
+                    </p>
+                </div>
+
+                <div id="qrResult" class="qr-result" style="display: none;">
+                    <div class="qr-container">
+                        <div id="qrcode"></div>
+                    </div>
+
+                    <div class="qr-info">
+                        <h3>QR Generado</h3>
+                        <p id="urlInfo" style="display: none;"><strong>URL:</strong> <span id="urlText"></span></p>
+                        <p id="expirationInfo" style="display: none;"><strong>Expira:</strong> <span id="expirationText"></span></p>
+                        
+                        <div class="warning" id="warningBox" style="display: none;">
+                            <p><strong>Nota:</strong> Los códigos QR no expiran automáticamente. 
+                            La fecha mostrada es solo informativa. Para expiración real, usa un 
+                            servicio de acortamiento de URLs con expiración (Bitly, TinyURL, etc.).</p>
+                        </div>
+
+                        <div class="info-box" id="infoBox" style="display: none;">
+                            <p><strong>Metadata incluida:</strong> Este QR contiene un JSON con la URL y las fechas. 
+                            Tu aplicación debe leer este JSON y validar la fecha de expiración.</p>
+                        </div>
+                    </div>
+
+                    <button id="downloadBtn" class="btn btn-download">
+                        Descargar QR
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <p>Desarrollado con JavaScript - Los QR se generan localmente en tu navegador</p>
+        </footer>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
